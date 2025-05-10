@@ -7,11 +7,10 @@ import { cn } from "@/lib/utils";
 import { imageHelpers } from "@/lib/image-helpers";
 import type {ModelTiming} from "@/lib/image-types";
 import { Label } from "@/components/ui/label";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { getModelById } from "@/lib/model-config";
 
 interface ImageDisplayProps {
-    modelId: ModelId;
+    modelId: string;
     image: string | null | undefined;
     timing?: ModelTiming;
     failed?: boolean;

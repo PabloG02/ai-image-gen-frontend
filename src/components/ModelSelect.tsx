@@ -1,8 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { imageHelpers } from "@/lib/image-helpers";
 import {type ModelInfo, MODELS} from "@/lib/model-config";
-import { cn } from "@/lib/utils";
 import {
     Select,
     SelectContent,
