@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type {ImageError, ImageResult, ModelTiming} from "@/lib/image-types";
 import { initializeModelRecord } from "@/lib/model-config.ts";
+import { API_URL } from "@/lib/config";
 
 interface UseImageGenerationReturn {
     images: ImageResult[];
@@ -72,9 +73,7 @@ export function useImageGeneration(): UseImageGenerationReturn {
                         model: modelId,
                         prompt,
                         size,
-                    };
-
-                    const response = await fetch("http://localhost:8000/v1/images/generations", {
+                    };                    const response = await fetch(`${API_URL}/v1/images/generations`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(request),

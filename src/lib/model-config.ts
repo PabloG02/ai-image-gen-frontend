@@ -1,3 +1,5 @@
+import { API_URL } from "@/lib/config";
+
 export type ModelInfo = {
     publisher: string;
     family: string;
@@ -21,7 +23,7 @@ export let MODELS: ModelInfo[] = [...defaultModels];
 // Function to fetch models from the backend
 export const fetchModels = async (): Promise<ModelInfo[]> => {
     try {
-        const response = await fetch('http://localhost:8000/v1/models');
+        const response = await fetch(`${API_URL}/v1/models`);
         if (!response.ok) {
             throw new Error(`Failed to fetch models: ${response.statusText}`);
         }
