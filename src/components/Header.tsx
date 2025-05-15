@@ -31,7 +31,7 @@ export function Header() {
             <div className="mx-auto flex justify-between items-center">
                 <h1 className="text-xl flex items-center sm:text-2xl sm:font-bold antialiased font-semibold">
                     <SparklesIcon />
-                    AI Image Generator (Test 1)
+                    AI Image Generator (Test Presentación)
                 </h1>
             </div>
         </header>
