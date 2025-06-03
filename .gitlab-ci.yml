@@ -1,0 +1,19 @@
+variables:
+  DOCKER_DRIVER: overlay2
+
+stages:
+  - build-and-publish
+
+build-and-publish:
+  stage: build-and-publish
+  image: docker:28.1.1
+  services:
+    - docker:28.1.1-dind
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
+  before_script:
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker push $CI_REGISTRY_IMAGE:latest
