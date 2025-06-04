@@ -1,13 +1,32 @@
+# This is a GitLab CI/CD configuration file for building and publishing a Docker image.
+# stages:
+#   - build-and-publish
+#
+# build-and-publish:
+#   stage: build-and-publish
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "main"
+#
+#   before_script:
+#     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+#   script:
+#     - docker build --no-cache -t $CI_REGISTRY_IMAGE:latest .
+#     - docker push $CI_REGISTRY_IMAGE:latest
+
 stages:
-  - build-and-publish
+  - build
 
-build-and-publish:
-  stage: build-and-publish
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-
+build_app:
+  stage: build
+  image: node:24-alpine
   before_script:
-    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+    # Enable and activate pnpm
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+    # Install dependencies
+    - pnpm install --frozen-lockfile
   script:
-    - docker build --no-cache -t $CI_REGISTRY_IMAGE:latest .
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - pnpm run build
+  only:
+    - merge_requests
+    - main
